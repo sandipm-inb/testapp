@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKR4mx4vC9qkPaJt-QfqNvgWv5Fq0ogLg&sensor=false">
+    </script>	    
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(34.397, 170.644),
+          zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById("map-canvas"),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+	<h1>Search MongoDB</h1>
+	<table>
+		<tr>
+			<td>City to find : </td> <td><input name="city_name" id="inputCity"/></td>
+			<td><button name="Search" id="inputSearch" onclick="search_map()">Search</button></td>			
+			<td><button name="Open Map" id="inputMap" onclick="initialize()">Open Map</button></td>
+		</tr>
+		<tr>
+			<td>
+				<div id="search_status">
+					<h1>Search in Progress</h1>
+				</div>
+			</td>
+		</tr>
+	</table>  
+    <div id="map-canvas"/>
+  </body>
+</html>
