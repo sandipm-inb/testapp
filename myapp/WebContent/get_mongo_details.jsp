@@ -5,15 +5,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Mongo JSP Sample Page</title>
-<%@ page import="com.sdm.mongo.*"  %>
+<%-- <%@ page import="com.sdm.mongo.*"  %> --%>
+<%@ page import="com.mongodb.*"  %>
 </head>
 <body>
 <h1>Mongo DB Details</h1>
 <h1>Choose Collection Name : </h1>
+<table border=1 cellpadding=5>
+	<tr>
+		<th>Result Number</th>
+		<th>Result Data</th>
+	</tr>
+
 <%
-	SMongoUtil mUtil = new SMongoUtil();
+	//connect to mongodb
+	MongoClient mongoClient = new MongoClient("localhost",27017);
+
+	//Get mongodb instance
+	DB mongoDB = mongoClient.getDB("geoprofile");
+	
+	//get collection
+	DBCollection mongoColl = mongoDB.getCollection("geodata");
+	DBCursor mongoCur = mongoColl.find();
+	int i=1;
+	while(mongoCur.hasNext()){
+%>		
+		<tr>
+			<td><%=i %></td>
+			<td><%=mongoCur.next() %></td>
+		</tr>		
+<%
+			i++;
+		} 
+		mongoCur.close();
+		mongoClient.close();
 %>
-<p> The No. of rows in collection <%= mUtil.getMongoDBConn()%></p>
-<p> The first content in video_data <%= mUtil.getResultData()%></p>
+</table>		
 </body>
 </html>

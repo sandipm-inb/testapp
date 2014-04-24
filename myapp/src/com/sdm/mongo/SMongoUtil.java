@@ -65,9 +65,8 @@ public class SMongoUtil {
 	}
 	
 	//display collection data on page	
-	public String getResultData(){
-		dbColl = getMongoCollection("video_data");
-		resultData = dbColl.findOne().toMap().toString();
+	public String getResultData(){		
+		resultData = getMongoCollection("video_data").findOne().toMap().toString();
 		return resultData;
 	}
 	
